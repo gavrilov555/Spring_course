@@ -4,7 +4,7 @@ package com.geekbrains.spring.web.data;
 public class Product {
     private Long id;
     private String title;
-    private int cost;
+    private Integer cost;
 
 
     public Long getId() {
@@ -27,14 +27,14 @@ public class Product {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 
     public Product() {
     }
 
-    public Product(Long id, String title, int cost) {
+    public Product(Long id, String title, Integer cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;

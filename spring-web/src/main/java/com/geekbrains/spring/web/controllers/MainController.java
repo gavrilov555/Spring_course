@@ -1,46 +1,33 @@
 package com.geekbrains.spring.web.controllers;
 
 import com.geekbrains.spring.web.data.Product;
-import com.geekbrains.spring.web.repositories.ProductsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.geekbrains.spring.web.services.ProductService;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class MainController {
-    ProductsRepository productsRepository;
-@Autowired
-    public MainController(ProductsRepository productsRepository) {
-        this.productsRepository = productsRepository;
+
+    private ProductService productService;
+
+    public MainController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping("/add")
-    @ResponseBody
-    public int add(@RequestParam int a, @RequestParam int b) {
-        return a + b;
-    }
-
-
-    @GetMapping("/product/{id}/info")
-    @ResponseBody
-    public int findProduct (@PathVariable int id) {
-    return id;
-    }
 
     @GetMapping("/products")
-    public String showProductPage(Model model) {
-        model.addAttribute("products", productsRepository.getAllProducts());
-        return "products_page";
+    public List<Product> getAllProduct() {
+        return productService.getAllProducts();
     }
 
-    @GetMapping("/product/{id}")
-    public String findProduct(Model model, @PathVariable Long id) {
-        Product product = productsRepository.findById(id);
-        model.addAttribute("product", product);
-        return "product_page";
+    @GetMapping("/products/delete/{id}")
+    public void deleteById(@PathVariable Long id) {
+        productService.deleteById(id);
+    }
+
+    @GetMapping("/products/change_cost")
+    public void changeCost(@RequestParam Long productId, @RequestParam Integer delta) {
+        productService.changeCost(productId, delta);
     }
 }
