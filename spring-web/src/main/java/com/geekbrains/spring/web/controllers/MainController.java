@@ -17,8 +17,8 @@ public class MainController {
 
 
     @GetMapping("/products")
-    public List<Product> getAllProduct() {
-        return productService.getAllProducts();
+    public List<Product> findProduct() {
+        return productService.findAll();
     }
 
     @GetMapping("/products/delete/{id}")

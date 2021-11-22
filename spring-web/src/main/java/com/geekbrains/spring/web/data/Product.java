@@ -1,9 +1,17 @@
 package com.geekbrains.spring.web.data;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private Long id;
+    @Column (name = "title")
     private String title;
+    @Column (name = "cost")
     private Integer cost;
 
 
@@ -33,6 +41,7 @@ public class Product {
 
     public Product() {
     }
+
 
     public Product(Long id, String title, Integer cost) {
         this.id = id;
