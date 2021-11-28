@@ -1,5 +1,6 @@
 package com.geekbrains.spring.web.data;
 
+
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,28 +8,28 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
-@Setter
-@NoArgsConstructor
+@Setter@NoArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "Products")
-public class Product {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column(name = "id")
     @NotNull
     private Long id;
-    @Column (name = "title")
+    @Column(name = "name")
     @NotNull
-    private String title;
-    @Column (name = "cost")
-    @NotNull
-    private Integer cost;
+    private String name;
 
-    @OneToMany (mappedBy = "product")
-    private List<Order> orders;
+    @ManyToOne
+    @JoinColumn (name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn (name = "client_id")
+    private Client client;
 
 }
