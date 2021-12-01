@@ -7,13 +7,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "Products")
 public class Product {
     @Id
@@ -27,8 +26,5 @@ public class Product {
     @Column (name = "cost")
     @NotNull
     private Integer cost;
-
-    @OneToMany (mappedBy = "product")
-    private List<Order> orders;
 
 }

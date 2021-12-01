@@ -1,39 +1,44 @@
 package com.geekbrains.spring.web.services;
 
+import com.geekbrains.spring.web.Exception.ResourceNotFoundException;
 import com.geekbrains.spring.web.data.Product;
-import com.geekbrains.spring.web.repositories.ProductDaoImpl;
 import com.geekbrains.spring.web.repositories.ProductsRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
 
-    private ProductDaoImpl productDao;
+    private ProductsRepository productsRepository;
 
-    public ProductService (ProductDaoImpl productDao) {
-        this.productDao = productDao;
+    public ProductService (ProductsRepository productsRepository) {
+        this.productsRepository = productsRepository;
     }
 
 
     public List<Product> findAll() {
-        return productDao.findAll();
+        return productsRepository.findAll();
     }
 
+    public Optional<Product> findById(Long id) {
+        return productsRepository.findById(id);
+    }
 
     public void deleteById(Long id) {
-        productDao.deleteById(id);
+        productsRepository.deleteById(id);
     }
 
-    public void changeCost(Long id, Integer delta) {
-        Product product = productDao.findById(id);
-        int newCost = product.getCost();
-        newCost = newCost + delta;
-        if (newCost < 0) {
-            newCost = 0;
-        }
-        product.setCost(newCost);
-        productDao.saveOrUpdate(product);
+    @Transactional
+    public void changeCost(Long productId, Integer delta) {
+        Product product = productsRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException(" Unable to change product cost. Product not found, id: " + productId));
+        product.setCost(product.getCost() + delta);
     }
+
+   public List<Product> findByScoreBetween(Integer min, Integer max) {
+        return productsRepository.findAllByScoreBetween(min, max);
+   }
 }

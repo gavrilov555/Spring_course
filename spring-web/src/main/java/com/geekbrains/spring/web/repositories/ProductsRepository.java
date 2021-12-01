@@ -1,35 +1,14 @@
 package com.geekbrains.spring.web.repositories;
 
 import com.geekbrains.spring.web.data.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Component
-public class ProductsRepository {
-    private List<Product> products;
+public interface ProductsRepository extends JpaRepository<Product, Long> {
 
-    @PostConstruct
-    public void init() {
-        products = new ArrayList<>(List.of(
-                new Product(1L, "Milk", 45),
-                new Product(2L, "Chocolate",190),
-                new Product(3L, "Orange",50)
-        ));
-    }
-
-    public List<Product> getAllProducts() {
-        return Collections.unmodifiableList(products);
-    }
-
-    public Product findById(Long id) {
-        return products.stream().filter(p -> p.getId().equals(id)).findFirst().get();
-    }
-
-    public void deleteById(Long id) {
-        products.removeIf(p -> p.getId().equals(id));
-    }
+    @Query("select p from Product p where p.cost between ?1 and ?2")
+    List<Product> findAllByScoreBetween(Integer min, Integer max);
 }
