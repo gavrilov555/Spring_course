@@ -28,5 +28,20 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
+    $scope.Filters = function () {
+            $http({
+                url: contextPath + '/products/cost_between',
+                method: 'GET',
+                params: {
+                    min: $scope.min,
+                    max: $scope.max
+                }
+            }).then(function (response) {
+                $scope.ProductsList = response.data;
+                $scope.min = null;
+                $scope.max = null;
+            });
+        }
+
     $scope.loadProducts();
 });
