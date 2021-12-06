@@ -1,6 +1,7 @@
 package com.geekbrains.spring.web.controllers;
 
 import com.geekbrains.spring.web.Exception.ResourceNotFoundException;
+
 import com.geekbrains.spring.web.data.Product;
 import com.geekbrains.spring.web.services.ProductService;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
@@ -41,5 +42,6 @@ public class MainController {
     public List<Product> findStudentsByScoreBetween(@RequestParam(defaultValue = "0") Integer min, @RequestParam(defaultValue = "1000") Integer max) {
         return productService.findByScoreBetween(min, max);
     }
+
 
 }

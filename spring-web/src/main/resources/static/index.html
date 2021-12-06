@@ -15,6 +15,17 @@
 <body>
 
 <div class="container" ng-controller="indexController">
+
+    <p></p>
+    <h3>Поиск по цене</h3>
+    <form novalidate ng-submit="Filters()">
+        <input class="form-control" type="number" placeholder="Минимальная цена" ng-model="min">
+        <p></p>
+        <input class="form-control" type="number" placeholder="Максимальная цена" ng-model="max">
+        <p></p>
+        <button type="submit" class="btn btn-outline-primary">Получить результат</button>
+    </form>
+
     <h3>Список продуктов</h3>
     <table class="table table-striped" cellpadding="0" cellspacing="0">
         <tr>
