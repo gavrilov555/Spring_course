@@ -16,14 +16,23 @@
 
 <div class="container" ng-controller="indexController">
 
-    <p></p>
-    <h3>Поиск по цене</h3>
-    <form novalidate ng-submit="Filters()">
-        <input class="form-control" type="number" placeholder="Минимальная цена" ng-model="min">
+    <form novalidate ng-submit="loadProducts()">
+        <div class="form-floating input-group-sm">
+            <input type="text" class="form-control" id="filterTitle" placeholder="" ng-model="filter.title_part">
+            <label for="filterTitle">Наименование продукта</label>
+        </div>
         <p></p>
-        <input class="form-control" type="number" placeholder="Максимальная цена" ng-model="max">
+        <div class="form-floating input-group-sm">
+            <input type="number" class="form-control" id="filterMinCost" placeholder="" ng-model="filter.min_cost">
+            <label for="filterMinCost">Минимальная цена</label>
+        </div>
         <p></p>
-        <button type="submit" class="btn btn-outline-primary">Получить результат</button>
+        <div class="form-floating input-group-sm">
+            <input type="number" class="form-control" id="filterMaxCost" placeholder="" ng-model="filter.max_cost">
+            <label for="filterMaxCost">Максимальная цена</label>
+        </div>
+        <p></p>
+        <button class="btn btn-outline-primary" style="width: 100%;" type="submit">Применить</button>
     </form>
 
     <h3>Список продуктов</h3>
@@ -50,5 +59,6 @@
         </tbody>
     </table>
 </div>
+</form>
 </body>
 </html>

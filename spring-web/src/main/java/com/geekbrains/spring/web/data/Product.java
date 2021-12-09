@@ -1,10 +1,6 @@
 package com.geekbrains.spring.web.data;
 
-import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,18 +9,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
-    @NotNull
+    @NonNull
     private Long id;
     @Column (name = "title")
-    @NotNull
+    @NonNull
     private String title;
     @Column (name = "cost")
-    @NotNull
+    @NonNull
     private Integer cost;
 
 }
