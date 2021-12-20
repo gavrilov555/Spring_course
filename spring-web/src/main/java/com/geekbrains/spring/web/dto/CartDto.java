@@ -1,26 +1,20 @@
 package com.geekbrains.spring.web.dto;
 
-
-import com.geekbrains.spring.web.data.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class CartDto {
 
     private Long id;
     private String title;
+    private Integer count;
     private Integer cost;
 
-    public ProductDto(Product product) {
-        this.id = product.getId();
-        this.title = product.getTitle();
-        this.cost = product.getCost();
-        }
+
 }

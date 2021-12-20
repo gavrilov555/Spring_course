@@ -42,22 +42,48 @@
             <td>Наименование</td>
             <td>Цена</td>
             <td>Действие</td>
+
         </tr>
         <tbody>
         <tr ng-repeat="p in ProductsList">
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
+            <td>{{p.cost}}</td>
+
             <td>
-                <button class="btn btn-outline-primary" ng-click="changeCost(p.id, -5)">-</button>
-                {{p.cost}}
-                <button class="btn btn-outline-primary" ng-click="changeCost(p.id, 5)">+</button>
-            </td>
-            <td>
-                <button class="btn btn-outline-danger" ng-click="deleteProduct(p.id)">Удалить</button>
+                <button class="btn btn-danger" ng-click="addProductToCart(p.id)">Добавить в корзину</button>
             </td>
         </tr>
         </tbody>
     </table>
+    <p></p>
+
+    <h3>Корзина</h3>
+    <table class="table table-hover">
+        <tr>
+            <td>ID</td>
+            <td>Наименование товара</td>
+            <td>Цена за один товар</td>
+            <td>Количество товара</td>
+            <td>Действие</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in CartList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.cost}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changeCount(p.id, -1)">-</button>
+                {{p.count}}
+                <button class="btn btn-primary" ng-click="changeCount(p.id, 1)">+</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteFromCart(p.id)">Удалить из корзины</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p></p>
 </div>
 </form>
 </body>
