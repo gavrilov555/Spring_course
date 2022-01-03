@@ -1,71 +1,37 @@
 package com.geekbrains.spring.web.services;
-import com.geekbrains.spring.web.dto.CartDto;
-import com.geekbrains.spring.web.dto.ProductDto;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+
+import com.geekbrains.spring.web.data.Product;
+import com.geekbrains.spring.web.dto.Cart;
+
+import com.geekbrains.spring.web.exceptions.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 
-@Getter
-@Setter
-@Slf4j
 @Service
+@RequiredArgsConstructor
 public class CartService {
+    private final ProductsService productsService;
+    private Cart cart;
 
-    private ArrayList<CartDto> productInCarts = new ArrayList<>();
+    @PostConstruct
+    public void init() {
+        cart = new Cart();
+    }
 
-    public void deleteById(Long id) {
-     ArrayList<CartDto> productInCartsForIteration = new ArrayList<>(productInCarts);
-     for (CartDto product : productInCartsForIteration) {
-         if (product.getId().equals(id)) {
-             productInCarts.remove(product);
-         }
-     }
-}
- public CartDto addProduct (ProductDto productDto) {
-    boolean isPresent = false;
-    CartDto cartDto = new CartDto(
-        productDto.getId(),
-        productDto.getTitle(),
-        productDto.getCost(),
-        1);
-    for (CartDto product : productInCarts) {
-        if (product.getId().equals(productDto.getId())) {
-            isPresent = true;
-            break;
+    public Cart getCurrentCart() {
+        return cart;
+    }
+
+    public void addProductByIdToCart(Long productId) {
+        if (!getCurrentCart().addProduct(productId)) {
+            Product product = productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
+            getCurrentCart().addProduct(product);
         }
     }
-     if (!isPresent) {
-         productInCarts.add(cartDto);
-     }
-     return cartDto;
- }
 
-
-    public CartDto changeProductCount(Long id, Integer count) {
-        ArrayList<CartDto> productInCardsForIteration = new ArrayList<>(productInCarts);
-        Integer newCount;
-        CartDto newNewCartDto = null;
-        for (CartDto product : productInCardsForIteration) {
-            if (product.getId().equals(id)) {
-                newCount = product.getCount() + count;
-                if (newCount<1){
-                    newCount=1;
-                }
-                CartDto newCartDto = new CartDto(
-                        product.getId(),
-                        product.getTitle(),
-                        product.getCost(),
-                        newCount);
-                newNewCartDto = newCartDto;
-                productInCarts.remove(product);
-                productInCarts.add(newCartDto);
-                break;
-            }
-        }
-        return newNewCartDto;
+    public void clear() {
+        getCurrentCart().clear();
     }
 }
-

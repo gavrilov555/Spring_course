@@ -10,7 +10,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/spring-web/pom.xml" />
-        <option value="$PROJECT_DIR$/dao/pom.xml" />
       </list>
     </option>
   </component>
