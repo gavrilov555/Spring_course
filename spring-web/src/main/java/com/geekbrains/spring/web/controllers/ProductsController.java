@@ -28,11 +28,10 @@ public class ProductsController {
         if (page < 1) {
             page = 1;
         }
-        return productsService.find(minCost, maxCost, titlePart, page).map(
-                p -> new ProductDto(p)
+        return productsService.findAll(minCost, maxCost, titlePart, page).map(
+                p -> productConverter.entityToDto(p)
         );
     }
-
 
     @GetMapping("/{id}")
     public ProductDto getProductById(@PathVariable Long id) {

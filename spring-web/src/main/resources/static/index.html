@@ -1,5 +1,6 @@
 <!doctype html>
 
+
 <html ng-app="app">
 
 <head>
@@ -46,33 +47,32 @@
     <form novalidate ng-submit="loadProducts()">
         <div class="form-floating input-group-sm">
             <input type="text" class="form-control" id="filterTitle" placeholder="" ng-model="filter.title_part">
-            <label for="filterTitle">Наименование продукта</label>
+            <label for="filterTitle">Название продукта</label>
         </div>
         <p></p>
         <div class="form-floating input-group-sm">
             <input type="number" class="form-control" id="filterMinCost" placeholder="" ng-model="filter.min_cost">
-            <label for="filterMinCost">Минимальная цена</label>
+            <label for="filterMinCost">Мин. цена</label>
         </div>
         <p></p>
         <div class="form-floating input-group-sm">
             <input type="number" class="form-control" id="filterMaxCost" placeholder="" ng-model="filter.max_cost">
-            <label for="filterMaxCost">Максимальная цена</label>
+            <label for="filterMaxCost">Макс. цена</label>
         </div>
         <p></p>
-        <button class="btn btn-outline-primary" style="width: 100%;" type="submit">Применить</button>
+        <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Применить</button>
     </form>
 
-    <h3>Список продуктов</h3>
-    <table class="table table-striped" cellpadding="0" cellspacing="0">
+    <h3>Каталог товаров</h3>
+    <table class="table table-hover">
         <tr>
             <td>ID</td>
-            <td>Наименование</td>
+            <td>Название</td>
             <td>Цена</td>
-            <td>Действие</td>
-
+            <td></td>
         </tr>
         <tbody>
-        <tr ng-repeat="p in ProductsList">
+        <tr ng-repeat="p in ProductsPage.content">
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
             <td>{{p.cost}}</td>
@@ -105,12 +105,26 @@
     </table>
     <p>
         <button class="btn btn-secondary" ng-click="clearCart()">Очистить корзину</button>
-        <button class="btn btn-primary" ng-click="createOrder()">Оформить заказ</button>
+
+    <form novalidate ng-submit="createOrder()">
+        <div class="form-floating input-group-sm">
+            <input type="text" class="form-control" id="orderAddress" placeholder="" ng-model="order.address">
+            <label for="orderAddress">Адрес</label>
+        </div>
+        <p></p>
+        <div class="form-floating input-group-sm">
+            <input type="text" class="form-control" id="orderPhone" placeholder="" ng-model="order.phone">
+            <label for="orderPhone">Телефон</label>
+        </div>
+        <p></p>
+        <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Оформить заказ</button>
+    </form>
+
+
     </p>
     <p>
         <button class="btn btn-danger" ng-click="showCurrentUserInfo()">Обо мне</button>
     </p>
-
 </div>
 
 </body>
