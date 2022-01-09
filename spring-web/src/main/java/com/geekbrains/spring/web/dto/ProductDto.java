@@ -3,13 +3,10 @@ package com.geekbrains.spring.web.dto;
 
 import com.geekbrains.spring.web.data.Product;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
@@ -22,5 +19,5 @@ public class ProductDto {
         this.id = product.getId();
         this.title = product.getTitle();
         this.cost = product.getCost();
-        }
+    }
 }
