@@ -1,6 +1,5 @@
 package com.geekbrains.spring.web.configs;
 
-
 import com.geekbrains.spring.web.utils.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;

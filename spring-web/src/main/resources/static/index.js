@@ -1,106 +1,72 @@
-angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
-    const contextPath = 'http://localhost:8189/app/api/v1';
+(function () {
+    angular
+        .module('market-front', ['ngRoute', 'ngStorage'])
+        .config(config)
+        .run(run);
 
-   if ($localStorage.springWebUser) {
-           $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
-       }
+    function config($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'welcome/welcome.html',
+                controller: 'welcomeController'
+            })
+            .when('/store', {
+                templateUrl: 'store/store.html',
+                controller: 'storeController'
+            })
+            .when('/orders', {
+                templateUrl: 'orders/orders.html',
+                controller: 'ordersController'
+            })
+            .when('/cart', {
+                templateUrl: 'cart/cart.html',
+                controller: 'cartController'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    }
 
-       $scope.loadProducts = function (pageIndex = 1) {
-           $http({
-               url: contextPath + '/products',
-               method: 'GET',
-               params: {
-                   title_part: $scope.filter ? $scope.filter.title_part : null,
-                   min_price: $scope.filter ? $scope.filter.min_cost : null,
-                   max_price: $scope.filter ? $scope.filter.max_cost : null
-               }
-           }).then(function (response) {
-               $scope.ProductsPage = response.data;
-           });
-       };
+    function run($rootScope, $http, $localStorage) {
+        if ($localStorage.springWebUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
+        }
+    }
+})();
 
-       $scope.addToCart = function (productId) {
-           $http.get('http://localhost:8189/app/api/v1/carts/add/' + productId)
-               .then(function (response) {
-                   $scope.loadCart();
-               });
-       }
+angular.module('market-front').controller('indexController', function ($rootScope, $scope, $http, $location, $localStorage) {
+    $scope.tryToAuth = function () {
+        $http.post('http://localhost:8189/app/auth', $scope.user)
+            .then(function successCallback(response) {
+                if (response.data.token) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
 
-       $scope.clearCart = function () {
-           $http.get('http://localhost:8189/app/api/v1/carts/clear')
-               .then(function (response) {
-                   $scope.loadCart();
-               });
-       }
+                    $scope.user.username = null;
+                    $scope.user.password = null;
 
-       $scope.loadCart = function () {
-           $http.get('http://localhost:8189/app/api/v1/carts')
-               .then(function (response) {
-                   $scope.Cart = response.data;
-               });
-       }
+                    $location.path('/');
+                }
+            }, function errorCallback(response) {
+            });
+    };
 
-       $scope.tryToAuth = function () {
-           $http.post('http://localhost:8189/app/auth', $scope.user)
-               .then(function successCallback(response) {
-                   if (response.data.token) {
-                       $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
-                       $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
+    $scope.tryToLogout = function () {
+        $scope.clearUser();
+        $scope.user = null;
+        $location.path('/');
+    };
 
-                       $scope.user.username = null;
-                       $scope.user.password = null;
-                   }
-               }, function errorCallback(response) {
-               });
-       };
+    $scope.clearUser = function () {
+        delete $localStorage.springWebUser;
+        $http.defaults.headers.common.Authorization = '';
+    };
 
-       $scope.tryToLogout = function () {
-           $scope.clearUser();
-           if ($scope.user.username) {
-               $scope.user.username = null;
-           }
-           if ($scope.user.password) {
-               $scope.user.password = null;
-           }
-       };
-
-       $scope.clearUser = function () {
-           delete $localStorage.springWebUser;
-           $http.defaults.headers.common.Authorization = '';
-       };
-
-       $scope.createOrder = function () {
-           $http({
-               url: 'http://localhost:8189/app/api/v1/orders',
-               method: 'GET',
-               params: {
-                   address: $scope.order ? $scope.order.address : null,
-                   phone: $scope.order ? $scope.order.phone : null,
-                   user_name: $scope.user ? $scope.user.username : null,
-               }
-           }).then(function (response){
-               $scope.clearCart();
-           });
-       }
-
-
-       $rootScope.isUserLoggedIn = function () {
-           if ($localStorage.springWebUser) {
-               return true;
-           } else {
-               return false;
-           }
-       };
-
-       $scope.showCurrentUserInfo = function () {
-           $http.get('http://localhost:8189/app/api/v1/profile')
-               .then(function successCallback(response) {
-                   alert('MY NAME IS: ' + response.data.username);
-               }, function errorCallback(response) {
-                   alert('UNAUTHORIZED');
-               });
-       }
-
-       $scope.loadProducts();
-       $scope.loadCart();
-   });
+    $rootScope.isUserLoggedIn = function () {
+        if ($localStorage.springWebUser) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+});

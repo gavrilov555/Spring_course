@@ -1,8 +1,7 @@
 package com.geekbrains.spring.web.services;
 
-import com.geekbrains.spring.web.data.Product;
 import com.geekbrains.spring.web.dto.Cart;
-
+import com.geekbrains.spring.web.entities.Product;
 import com.geekbrains.spring.web.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

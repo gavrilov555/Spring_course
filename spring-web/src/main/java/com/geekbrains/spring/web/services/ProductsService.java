@@ -1,7 +1,8 @@
 package com.geekbrains.spring.web.services;
 
-import com.geekbrains.spring.web.data.Product;
 import com.geekbrains.spring.web.dto.ProductDto;
+import com.geekbrains.spring.web.entities.Product;
+
 import com.geekbrains.spring.web.exceptions.ResourceNotFoundException;
 import com.geekbrains.spring.web.repositories.ProductsRepository;
 import com.geekbrains.spring.web.repositories.specifications.ProductsSpecifications;
@@ -19,13 +20,13 @@ import java.util.Optional;
 public class ProductsService {
     private final ProductsRepository productsRepository;
 
-    public Page<Product> findAll(Integer minCost, Integer maxCost, String partTitle, Integer page) {
+    public Page<Product> findAll(Integer minPrice, Integer maxPrice, String partTitle, Integer page) {
         Specification<Product> spec = Specification.where(null);
-        if (minCost != null) {
-            spec = spec.and(ProductsSpecifications.costGreaterOrEqualsThan(minCost));
+        if (minPrice != null) {
+            spec = spec.and(ProductsSpecifications.priceGreaterOrEqualsThan(minPrice));
         }
-        if (maxCost != null) {
-            spec = spec.and(ProductsSpecifications.costLessThanOrEqualsThan(maxCost));
+        if (maxPrice != null) {
+            spec = spec.and(ProductsSpecifications.priceLessThanOrEqualsThan(maxPrice));
         }
         if (partTitle != null) {
             spec = spec.and(ProductsSpecifications.titleLike(partTitle));
@@ -49,9 +50,8 @@ public class ProductsService {
     @Transactional
     public Product update(ProductDto productDto) {
         Product product = productsRepository.findById(productDto.getId()).orElseThrow(() -> new ResourceNotFoundException("Невозможно обновить продукта, не надйен в базе, id: " + productDto.getId()));
-        product.setCost(productDto.getCost());
+        product.setPrice(productDto.getPrice());
         product.setTitle(productDto.getTitle());
         return product;
     }
 }
-

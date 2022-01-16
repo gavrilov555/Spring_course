@@ -1,8 +1,7 @@
 package com.geekbrains.spring.web.services;
 
-
-import com.geekbrains.spring.web.data.Role;
-import com.geekbrains.spring.web.data.User;
+import com.geekbrains.spring.web.entities.Role;
+import com.geekbrains.spring.web.entities.User;
 import com.geekbrains.spring.web.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

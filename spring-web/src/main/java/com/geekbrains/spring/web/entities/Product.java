@@ -1,6 +1,7 @@
-package com.geekbrains.spring.web.data;
+package com.geekbrains.spring.web.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,16 +9,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "products")
 @Data
-@Table(name = "roles")
-public class Role {
+@NoArgsConstructor
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "price")
+    private Integer price;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -26,4 +31,10 @@ public class Role {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Product(Long id, String title, Integer price) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+    }
 }
