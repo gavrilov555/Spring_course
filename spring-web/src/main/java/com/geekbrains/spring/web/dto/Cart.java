@@ -1,7 +1,6 @@
 package com.geekbrains.spring.web.dto;
 
-
-import com.geekbrains.spring.web.data.Product;
+import com.geekbrains.spring.web.entities.Product;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 @Data
 public class Cart {
     private List<OrderItemDto> items;
-    private int totalCost;
+    private int totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
@@ -58,13 +57,13 @@ public class Cart {
 
     public void clear() {
         items.clear();
-        totalCost = 0;
+        totalPrice = 0;
     }
 
     private void recalculate() {
-        totalCost = 0;
+        totalPrice = 0;
         for (OrderItemDto o : items) {
-            totalCost += o.getCost();
+            totalPrice += o.getPrice();
         }
     }
 }

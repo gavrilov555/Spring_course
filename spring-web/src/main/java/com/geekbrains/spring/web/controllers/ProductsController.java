@@ -1,8 +1,9 @@
 package com.geekbrains.spring.web.controllers;
 
-import com.geekbrains.spring.web.converter.ProductConverter;
-import com.geekbrains.spring.web.data.Product;
+import com.geekbrains.spring.web.converters.ProductConverter;
 import com.geekbrains.spring.web.dto.ProductDto;
+import com.geekbrains.spring.web.entities.Product;
+
 import com.geekbrains.spring.web.exceptions.ResourceNotFoundException;
 import com.geekbrains.spring.web.services.ProductsService;
 import com.geekbrains.spring.web.validators.ProductValidator;
@@ -21,14 +22,14 @@ public class ProductsController {
     @GetMapping
     public Page<ProductDto> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
-            @RequestParam(name = "min_cost", required = false) Integer minCost,
-            @RequestParam(name = "max_cost", required = false) Integer maxCost,
+            @RequestParam(name = "min_price", required = false) Integer minPrice,
+            @RequestParam(name = "max_price", required = false) Integer maxPrice,
             @RequestParam(name = "title_part", required = false) String titlePart
     ) {
         if (page < 1) {
             page = 1;
         }
-        return productsService.findAll(minCost, maxCost, titlePart, page).map(
+        return productsService.findAll(minPrice, maxPrice, titlePart, page).map(
                 p -> productConverter.entityToDto(p)
         );
     }

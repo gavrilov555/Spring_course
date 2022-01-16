@@ -1,29 +1,30 @@
 package com.geekbrains.spring.web.dto;
 
-import com.geekbrains.spring.web.data.Product;
+import com.geekbrains.spring.web.entities.Product;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrderItemDto {
-
     private Long productId;
     private String productTitle;
     private int quantity;
-    private int costPerProduct;
-    private int cost;
+    private int pricePerProduct;
+    private int price;
 
     public OrderItemDto(Product product) {
         this.productId = product.getId();
         this.productTitle = product.getTitle();
         this.quantity = 1;
-        this.costPerProduct = product.getCost();
-        this.cost = product.getCost();
+        this.pricePerProduct = product.getPrice();
+        this.price = product.getPrice();
     }
 
     public void changeQuantity(int delta) {
         this.quantity += delta;
-        this.cost = this.quantity * this.costPerProduct;
+        this.price = this.quantity * this.pricePerProduct;
     }
 }
