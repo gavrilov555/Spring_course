@@ -1,0 +1,2 @@
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.flamexander.com/spring/ws/products", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package com.geekbrains.spring.web.soap.product;
