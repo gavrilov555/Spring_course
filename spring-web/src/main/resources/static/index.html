@@ -28,10 +28,10 @@
                     <a class="nav-link" href="#!/store">Каталог товаров</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#!/orders">Заказы</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#!/cart">Корзина</a>
+                </li>
+                <li class="nav-item" ng-show="isUserLoggedIn()">
+                    <a class="nav-link" href="#!/orders">Мои заказы</a>
                 </li>
 
                 <li class="nav-item" ng-show="!isUserLoggedIn()">
@@ -50,7 +50,7 @@
                     </form>
                 </li>
                 <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
-                    <button type="button" class="btn btn-outline-danger" ng-click="tryToLogout()">Выйти</button>
+                    <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
                 </li>
             </ul>
         </div>
@@ -60,8 +60,8 @@
 
     <script src="index.js"></script>
     <script src="store/store.js"></script>
-    <script src="orders/orders.js"></script>
     <script src="cart/cart.js"></script>
+    <script src="orders/orders.js"></script>
     <script src="welcome/welcome.js"></script>
 </div>
 
