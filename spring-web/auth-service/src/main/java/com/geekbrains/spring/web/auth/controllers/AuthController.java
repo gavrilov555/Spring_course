@@ -1,6 +1,5 @@
 package com.geekbrains.spring.web.auth.controllers;
 
-
 import com.geekbrains.spring.web.api.exception.AppError;
 import com.geekbrains.spring.web.auth.dto.JwtRequest;
 import com.geekbrains.spring.web.auth.dto.JwtResponse;

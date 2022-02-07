@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="front-service" />
-        <module name="api" />
         <module name="gateway" />
       </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -17,6 +16,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="auth-service" />
         <module name="core-service" />
+        <module name="api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
