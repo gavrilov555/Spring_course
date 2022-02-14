@@ -1,7 +1,7 @@
 package com.geekbrains.spring.web.core.controllers;
 
 import com.geekbrains.spring.web.core.converters.ProductConverter;
-import com.geekbrains.spring.web.core.dto.ProductDto;
+import com.geekbrains.spring.web.api.core.ProductDto;
 import com.geekbrains.spring.web.core.entities.Product;
 import com.geekbrains.spring.web.api.exception.ResourceNotFoundException;
 import com.geekbrains.spring.web.core.services.ProductsService;
