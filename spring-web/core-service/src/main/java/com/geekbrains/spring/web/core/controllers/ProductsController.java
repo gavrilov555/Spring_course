@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
@@ -23,15 +26,21 @@ public class ProductsController {
             @RequestParam(name = "p", defaultValue = "1") Integer page,
             @RequestParam(name = "min_price", required = false) Integer minPrice,
             @RequestParam(name = "max_price", required = false) Integer maxPrice,
-            @RequestParam(name = "title_part", required = false) String titlePart,
-            @RequestParam(name = "product_category_part", required = false) String productCategoryPart
+            @RequestParam(name = "title_part", required = false) String titlePart
     ) {
         if (page < 1) {
             page = 1;
         }
-        return productsService.findAll(minPrice, maxPrice, titlePart, productCategoryPart, page).map(
+        return productsService.findAll(minPrice, maxPrice, titlePart, page).map(
                 p -> productConverter.entityToDto(p)
         );
+    }
+
+    @GetMapping("/products")
+    public List<ProductDto> getAllProducts(){
+        return productsService.findAll().stream()
+                .map(p->productConverter.entityToDto(p))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -59,4 +68,6 @@ public class ProductsController {
     public void deleteById(@PathVariable Long id) {
         productsService.deleteById(id);
     }
+
+
 }

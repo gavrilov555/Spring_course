@@ -16,8 +16,4 @@ public class CartDto {
     private List<CartItemDto> items;
     private int totalPrice;
 
-    public List<CartItemDto> getItems(){
-        return items;
-    }
-
 }

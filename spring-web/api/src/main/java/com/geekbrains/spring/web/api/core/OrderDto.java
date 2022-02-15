@@ -1,10 +1,13 @@
 package com.geekbrains.spring.web.api.core;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDto {
     private Long id;
     private String username;

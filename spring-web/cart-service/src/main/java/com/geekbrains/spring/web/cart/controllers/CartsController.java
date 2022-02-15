@@ -2,16 +2,18 @@ package com.geekbrains.spring.web.cart.controllers;
 
 import com.geekbrains.spring.web.api.carts.CartDto;
 import com.geekbrains.spring.web.api.dto.StringResponse;
-
 import com.geekbrains.spring.web.cart.converters.CartConverter;
 import com.geekbrains.spring.web.cart.services.CartService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
+@Slf4j
 public class CartsController {
     private final CartService cartService;
     private final CartConverter cartConverter;
@@ -52,6 +54,13 @@ public class CartsController {
                 getCurrentCartUuid(username, null),
                 getCurrentCartUuid(null, uuid)
         );
+    }
+
+    @GetMapping("/product_count/{productId}")
+    public Integer getProductCountAddedToCartByDay(@PathVariable long productId){
+        String productKey = (LocalDate.now()) + "_"+ productId;
+        log.info(productKey);
+        return cartService.getCounterAddedToCartByDay(productKey);
     }
 
     private String getCurrentCartUuid(String username, String uuid) {
