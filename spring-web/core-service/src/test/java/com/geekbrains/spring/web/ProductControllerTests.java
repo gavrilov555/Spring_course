@@ -3,7 +3,7 @@ package com.geekbrains.spring.web;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geekbrains.spring.web.core.SpringWebApplication;
-import com.geekbrains.spring.web.core.dto.ProductDto;
+import com.geekbrains.spring.web.api.core.ProductDto;
 import com.geekbrains.spring.web.core.entities.Product;
 import com.geekbrains.spring.web.core.services.ProductsService;
 import lombok.extern.slf4j.Slf4j;

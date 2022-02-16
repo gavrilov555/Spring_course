@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/spring-web/api/api.iml" filepath="$PROJECT_DIR$/spring-web/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-web/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/spring-web/auth-service/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-web/cart-service/cart-service.iml" filepath="$PROJECT_DIR$/spring-web/cart-service/cart-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-web/core-service/core-service.iml" filepath="$PROJECT_DIR$/spring-web/core-service/core-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-web/front-service/front-service.iml" filepath="$PROJECT_DIR$/spring-web/front-service/front-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-web/gateway/gateway.iml" filepath="$PROJECT_DIR$/spring-web/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-web/recommendation-service/recommendation-service.iml" filepath="$PROJECT_DIR$/spring-web/recommendation-service/recommendation-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-web/spring-web.iml" filepath="$PROJECT_DIR$/spring-web/spring-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-web111.iml" filepath="$PROJECT_DIR$/.idea/spring-web111.iml" />
     </modules>

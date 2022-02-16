@@ -3,29 +3,28 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for spring-web" enabled="true">
-        <sourceOutputDir name="../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="front-service" />
-        <module name="gateway" />
-      </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="auth-service" />
-        <module name="core-service" />
+        <module name="front-service" />
+        <module name="cart-service" />
         <module name="api" />
+        <module name="core-service" />
+        <module name="gateway" />
+        <module name="recommendation-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="11" />
       <module name="auth-service" target="11" />
+      <module name="cart-service" target="11" />
       <module name="core-service" target="11" />
       <module name="dao" target="11" />
       <module name="front-service" target="11" />
       <module name="gateway" target="11" />
+      <module name="recommendation-service" target="11" />
       <module name="spring-web" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -33,10 +32,12 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api" options="" />
       <module name="auth-service" options="-parameters" />
+      <module name="cart-service" options="-parameters" />
       <module name="core-service" options="-parameters" />
       <module name="dao" options="-parameters" />
       <module name="front-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="recommendation-service" options="-parameters" />
       <module name="spring-web" options="-parameters" />
     </option>
   </component>

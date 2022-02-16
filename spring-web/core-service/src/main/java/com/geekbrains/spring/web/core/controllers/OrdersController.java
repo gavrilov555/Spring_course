@@ -1,15 +1,13 @@
 package com.geekbrains.spring.web.core.controllers;
 
 import com.geekbrains.spring.web.core.converters.OrderConverter;
-import com.geekbrains.spring.web.core.dto.OrderDetailsDto;
-import com.geekbrains.spring.web.core.dto.OrderDto;
-import com.geekbrains.spring.web.api.exception.ResourceNotFoundException;
+import com.geekbrains.spring.web.api.core.OrderDetailsDto;
+import com.geekbrains.spring.web.api.core.OrderDto;
 import com.geekbrains.spring.web.core.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +27,13 @@ public class OrdersController {
     @GetMapping
     public List<OrderDto> getCurrentUserOrders(@RequestHeader String username) {
         return orderService.findOrdersByUsername(username).stream()
+                .map(orderConverter::entityToDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/between_date")
+    public List<OrderDto> getAllOrdersInTimePeriod(@RequestHeader String startDate,
+                                                   @RequestHeader String finishDate) {
+        return orderService.findAllOrdersInTimePeriod(startDate,finishDate).stream()
                 .map(orderConverter::entityToDto).collect(Collectors.toList());
     }
 }

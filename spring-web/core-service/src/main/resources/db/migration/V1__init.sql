@@ -10,7 +10,9 @@ create table products
 insert into products (title, price)
 values ('Milk', 100),
        ('Bread', 80),
-       ('Cheese', 90);
+       ('Cheese', 90),
+       ('Ice cream', 100),
+       ('Olivia oil', 500);
 
 create table orders
 (
@@ -36,10 +38,19 @@ create table order_items
 );
 
 insert into orders (username, total_price, address, phone)
-values ('bob', 200, 'address', '12345');
+values ('bob', 200, 'address', '12345'),
+('alex', 200, 'address', '12345'),
+('john', 200, 'address', '12345'),
+('max', 200, 'address', '12345'),
+('tony', 200, 'address', '12345');
 
 insert into order_items (product_id, order_id, quantity, price_per_product, price)
-values (1, 1, 2, 100, 200);
+values (1, 1, 2, 100, 200),
+(2, 2, 50, 100, 200),
+(2, 3, 56, 100, 200),
+(1, 4, 12, 100, 200),
+(5, 5, 92, 100, 200);
+
 
 
 
