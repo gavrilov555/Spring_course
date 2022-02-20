@@ -2,6 +2,8 @@ package com.geekbrains.spring.web.core.services;
 
 import com.geekbrains.spring.web.api.exception.ResourceNotFoundException;
 import com.geekbrains.spring.web.api.core.ProductDto;
+import com.geekbrains.spring.web.api.response.Response;
+import com.geekbrains.spring.web.core.converters.ProductConverter;
 import com.geekbrains.spring.web.core.entities.Product;
 import com.geekbrains.spring.web.core.repositories.ProductsRepository;
 import com.geekbrains.spring.web.core.repositories.specifications.ProductsSpecifications;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -20,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductsService {
     private final ProductsRepository productsRepository;
+    private final ProductConverter productConverter;
 
     public Page<Product> findAll(Integer minPrice, Integer maxPrice, String partTitle, Integer page) {
         Specification<Product> spec = Specification.where(null);
@@ -54,6 +58,25 @@ public class ProductsService {
         product.setPrice(productDto.getPrice());
         product.setTitle(productDto.getTitle());
         return product;
+    }
+
+    public Response findByIdResponse (Long id) {
+        try {
+            Response response = new Response();
+            response.setCode(200);
+            response.setProductDto(productConverter.entityToDto(productsRepository.findById(id).get()));
+            response.setSuccess(true);
+            response.setMessage(" ");
+            return response;
+        } catch (NoSuchElementException e) {
+            Response response = new Response();
+            response.setCode(404);
+            ;
+            response.setSuccess(false);
+            response.setMessage(" Невозможно обновить продукт");
+            response.setProductDto(null);
+            return response;
+        }
     }
 
     public List<Product> findAll(){
