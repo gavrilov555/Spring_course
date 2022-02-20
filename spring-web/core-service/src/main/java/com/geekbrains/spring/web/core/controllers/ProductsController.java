@@ -1,5 +1,6 @@
 package com.geekbrains.spring.web.core.controllers;
 
+import com.geekbrains.spring.web.api.response.Response;
 import com.geekbrains.spring.web.core.converters.ProductConverter;
 import com.geekbrains.spring.web.api.core.ProductDto;
 import com.geekbrains.spring.web.core.entities.Product;
@@ -69,5 +70,8 @@ public class ProductsController {
         productsService.deleteById(id);
     }
 
-
+    @GetMapping("/exception/{id}")
+    public Response getProductByIdException(@PathVariable Long id) {
+        return productsService.findByIdResponse(id);
+    }
 }

@@ -28,10 +28,17 @@ public class CartsController {
         return new StringResponse(cartService.generateCartUuid());
     }
 
-    @GetMapping("/{uuid}/add/{productId}")
+    /*@GetMapping("/{uuid}/add/{productId}")
     public void add(@RequestHeader (required = false) String username, @PathVariable String uuid, @PathVariable Long productId) {
         cartService.addToCart(getCurrentCartUuid(username, uuid), productId);
     }
+
+     */
+    @GetMapping("/{uuid}/add/{productId}")
+    public StringResponse add(@RequestHeader(required = false) String username, @PathVariable String uuid, @PathVariable Long productId) {
+        return new StringResponse(cartService.addToCart(getCurrentCartUuid(username, uuid),productId));
+    }
+
 
     @GetMapping("/{uuid}/decrement/{productId}")
     public void decrement(@RequestHeader (required = false) String username, @PathVariable String uuid, @PathVariable Long productId) {
