@@ -40,7 +40,7 @@ public class CartService {
         return (Cart) redisTemplate.opsForValue().get(cartKey);
     }
 
-    /*public void addToCart(String cartKey, Long productId) {
+    public void addToCart(String cartKey, Long productId) {
         ProductDto productDto = productsServiceIntegration.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
         execute(cartKey, c -> {
             c.add(productDto);
@@ -48,9 +48,9 @@ public class CartService {
         changeDailyCountOfAddingProductToCart(productDto);
     }
 
-     */
 
-    public String addToCart(String cartKey, Long productId) {
+
+   /* public String addToCart(String cartKey, Long productId) {
         Response response = productsServiceIntegration.findById(productId);
         if (response.isSuccess()){
             ProductDto productDto = response.getProductDto();
@@ -61,6 +61,8 @@ public class CartService {
             return  response.getMessage();
         }
     }
+
+    */
 
     public void clearCart(String cartKey) {
         execute(cartKey, Cart::clear);
