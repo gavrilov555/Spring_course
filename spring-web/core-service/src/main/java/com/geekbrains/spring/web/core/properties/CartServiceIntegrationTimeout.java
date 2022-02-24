@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @ConfigurationProperties(prefix = "integrations.core-service.timeouts")
 @Data
 public class CartServiceIntegrationTimeout {
-    private Integer connect;
+    private Integer connections;
     private Integer read;
     private Integer write;
 
