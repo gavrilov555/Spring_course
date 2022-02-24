@@ -1,6 +1,7 @@
 package com.geekbrains.spring.web.cart.configs;
 
 import com.geekbrains.spring.web.cart.properties.CoreServiceIntegrationProperties;
+import com.geekbrains.spring.web.cart.properties.CoreServiceIntegrationPropertiesTimeout;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
@@ -28,10 +29,10 @@ public class AppConfig {
     public WebClient cartServiceWebClient() {
         TcpClient tcpClient = TcpClient
                 .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,coreServiceIntegrationsProperties.getConnectTimeout())
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,coreServiceIntegrationsProperties.getTimeout().getConnect())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(coreServiceIntegrationsProperties.getReadTimeout(), TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(coreServiceIntegrationsProperties.getWriteTimeout(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new ReadTimeoutHandler(coreServiceIntegrationsProperties.getTimeout().getRead(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(coreServiceIntegrationsProperties.getTimeout().getWrite(), TimeUnit.MILLISECONDS));
                 });
 
         return WebClient
