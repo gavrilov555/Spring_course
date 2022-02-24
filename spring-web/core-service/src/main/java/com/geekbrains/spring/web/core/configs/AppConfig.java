@@ -28,7 +28,7 @@ public class AppConfig {
     public WebClient cartServiceWebClient() {
         TcpClient tcpClient = TcpClient
                 .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,cartServiceIntegrationProperties.getTimeout().getConnect())
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,cartServiceIntegrationProperties.getTimeout().getConnections())
                 .doOnConnected(connection -> {
                     connection.addHandlerLast(new ReadTimeoutHandler(cartServiceIntegrationProperties.getTimeout().getRead(), TimeUnit.MILLISECONDS));
                     connection.addHandlerLast(new WriteTimeoutHandler(cartServiceIntegrationProperties.getTimeout().getWrite(), TimeUnit.MILLISECONDS));
