@@ -29,10 +29,10 @@ public class AppConfig {
     public WebClient cartServiceWebClient() {
         TcpClient tcpClient = TcpClient
                 .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,coreServiceIntegrationsProperties.getTimeout().getConnections())
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,coreServiceIntegrationsProperties.getTimeouts().getConnections())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(coreServiceIntegrationsProperties.getTimeout().getRead(), TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(coreServiceIntegrationsProperties.getTimeout().getWrite(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new ReadTimeoutHandler(coreServiceIntegrationsProperties.getTimeouts().getRead(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(coreServiceIntegrationsProperties.getTimeouts().getWrite(), TimeUnit.MILLISECONDS));
                 });
 
         return WebClient

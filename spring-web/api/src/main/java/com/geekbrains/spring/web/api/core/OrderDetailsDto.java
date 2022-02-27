@@ -1,11 +1,23 @@
 package com.geekbrains.spring.web.api.core;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrderDetailsDto {
-    private String address;
+
+    private String username;
+    private String name;
+    private String surname;
+    private String street;
+    private String house;
+    private String flat;
+    private String city;
+    private String district;
+    private String postalCode;
+    private String countryCode;
     private String phone;
+
 }

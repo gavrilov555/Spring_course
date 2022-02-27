@@ -10,6 +10,6 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 public class CoreServiceIntegrationProperties {
 
         private String url;
-        private CoreServiceIntegrationPropertiesTimeout timeout;
+        private CoreServiceIntegrationPropertiesTimeout timeouts;
 
     }

@@ -2,6 +2,7 @@ package com.geekbrains.spring.web.api.core;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -12,7 +13,7 @@ public class OrderDto {
     private Long id;
     private String username;
     private List<OrderItemDto> items;
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
     private String address;
     private String phone;
 }
