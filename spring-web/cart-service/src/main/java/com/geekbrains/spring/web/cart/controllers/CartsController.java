@@ -107,12 +107,13 @@ public class CartsController {
         );
     }
 
-    @GetMapping("/product_count/{productId}")
+   /* @GetMapping("/product_count/{productId}")
     public Integer getProductCountAddedToCartByDay(@PathVariable long productId){
         String productKey = (LocalDate.now()) + "_"+ productId;
-        log.info(productKey);
         return cartService.getCounterAddedToCartByDay(productKey);
     }
+
+    */
 
     private String getCurrentCartUuid(String username, String uuid) {
         if (username != null) {

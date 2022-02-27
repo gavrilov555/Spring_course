@@ -1,30 +1,19 @@
 package com.geekbrains.spring.web.api.exception;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class AppError {
-    private int statusCode;
+    private String code;
     private String message;
 
-    public int getStatusCode() {
-        return statusCode;
-    }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public AppError() {
-    }
-
-    public AppError(int statusCode, String message) {
-        this.statusCode = statusCode;
+    public AppError(String code, String message) {
+        this.code = code;
         this.message = message;
     }
 }

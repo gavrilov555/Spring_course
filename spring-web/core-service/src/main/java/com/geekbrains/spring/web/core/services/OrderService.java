@@ -5,6 +5,7 @@ import com.geekbrains.spring.web.api.carts.CartDto;
 import com.geekbrains.spring.web.api.core.OrderDetailsDto;
 import com.geekbrains.spring.web.core.entities.Order;
 import com.geekbrains.spring.web.core.entities.OrderItem;
+import com.geekbrains.spring.web.core.entities.OrderStatus;
 import com.geekbrains.spring.web.core.integrations.CartServiceIntegration;
 import com.geekbrains.spring.web.core.repositories.OrdersRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,10 +28,20 @@ public class OrderService {
     public void createOrder(String username, OrderDetailsDto orderDetailsDto) {
         CartDto currentCart = cartServiceIntegration.getUserCart(username);
         Order order = new Order();
-        order.setAddress(orderDetailsDto.getAddress());
+        order.setOrderStatus(OrderStatus.CREATED);
+        order.setCity(orderDetailsDto.getCity());
+        order.setCountryCode(orderDetailsDto.getCountryCode());
+        order.setFlat(orderDetailsDto.getFlat());
+        order.setStreet(orderDetailsDto.getStreet());
+        order.setHouse(orderDetailsDto.getHouse());
+        order.setName(orderDetailsDto.getName());
+        order.setSurname(orderDetailsDto.getSurname());
+        order.setDistrict(orderDetailsDto.getDistrict());
+        order.setPostalCode(orderDetailsDto.getPostalCode());
         order.setPhone(orderDetailsDto.getPhone());
         order.setUsername(username);
         order.setTotalPrice(currentCart.getTotalPrice());
+
         List<OrderItem> items = currentCart.getItems().stream()
                 .map(o -> {
                     OrderItem item = new OrderItem();
@@ -48,6 +60,16 @@ public class OrderService {
     public List<Order> findOrdersByUsername(String username) {
         return ordersRepository.findAllByUsername(username);
     }
+
+    public Order changeStatus(OrderStatus orderStatus,Long id){
+        Order order = ordersRepository.findById(id).get();
+        order.setOrderStatus(orderStatus);
+        return ordersRepository.save(order);
+    }
+    public Optional<Order> findById(Long id) {
+        return ordersRepository.findById(id);
+    }
+
 
     public List<Order> findAllOrdersInTimePeriod(String startDateString, String finishDateString) {
         LocalDateTime startDate = LocalDateTime.parse(startDateString);

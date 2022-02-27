@@ -6,11 +6,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 @ConstructorBinding
-@ConfigurationProperties(prefix = "integrations.core-service")
+@ConfigurationProperties(prefix = "integrations.cart-service")
 @Data
 public class CartServiceIntegrationProperties {
 
     private String url;
-    private CartServiceIntegrationTimeout timeout;
+    private CartServiceIntegrationTimeout timeouts;
 
 }
